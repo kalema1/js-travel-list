@@ -35,6 +35,10 @@ function handleSubmitItem(event) {
 
   // render the travel list
   travelListItemView.renderTravelList(travelItem);
+
+  //clear the input elements
+  inputItemElement.value = "";
+  quantityElement.value = "1";
 }
 
 // adding event listener to the form
