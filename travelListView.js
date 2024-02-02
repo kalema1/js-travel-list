@@ -1,47 +1,38 @@
 // this file is responsible for the views of the application
 
 class TravelListItemView {
-  // selecting the element in which the list is to be viewd
-  #listElement = document.getElementById("list");
+  constructor() {
+    // selecting the element in which the list is to be viewd
+    this.listElement = document.getElementById("list");
 
-  // data to be viewed
-  #data;
+    // data to be viewed
+    this.data;
+  }
 
   /**
    * renders the travel list item
    * @param {string} - data string to rendered
    */
   renderTravelList(data) {
-    this.#data = data;
-    const travelListMarkup = this.#generateTravelListMarkup();
-    this.#clearListMarkup();
-    this.#listElement.insertAdjacentHTML("beforeend", travelListMarkup);
+    this.data = data;
+    const travelListMarkup = this.#generateTravelListMarkup(this.data);
+    this.listElement.insertAdjacentHTML("beforeend", travelListMarkup);
   }
 
   /**
    *  generates the markup for the list items to be displayed
    *
    */
-  #generateTravelListMarkup() {
+  #generateTravelListMarkup(data) {
     //console.log(this.#data);
     const markup = `
-        <li class="list-item">
-            <input type="checkbox" class="list-checkbox" value="${
-              this.#data.packed
-            }" />
-            <span>${this.#data.quantity} ${this.#data.description}</span>
+        <li class="list-item" data-id="${data.id}">
+            <input type="checkbox" class="list-checkbox" value="${data.packed}" />
+            <span>${data.quantity} ${data.description}</span>
             <button class="delete-btn">❌</button>
         </li>
     `;
     return markup;
-  }
-
-  /**
-   * clears markup
-   *
-   */
-  #clearListMarkup() {
-    this.#listElement.innerHTML = "";
   }
 }
 
