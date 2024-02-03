@@ -47,6 +47,7 @@ formElement.addEventListener("submit", handleSubmitItem);
 
 /**
  * delegates event and deletes the selected item from the list.
+ * @param {object} event
  *
  */
 function deleteItem(event) {
