@@ -6,6 +6,7 @@ import { travelListItemView } from "./travelListView.js";
 const inputItemElement = document.getElementById("form-input");
 const quantityElement = document.getElementById("select-option");
 const formElement = document.getElementById("add-form");
+const isPackedElement = document.getElementById("packed");
 
 /**
  * submits item to the list
@@ -43,3 +44,18 @@ function handleSubmitItem(event) {
 
 // adding event listener to the form
 formElement.addEventListener("submit", handleSubmitItem);
+
+/**
+ * delegates event and deletes the selected item from the list.
+ *
+ */
+function deleteItem(event) {
+  const listItemElement = event.target.closest("#list-item");
+  const deleteElement = event.target.closest("#delete");
+  deleteElement?.addEventListener("click", () => {
+    listItemElement.remove();
+  });
+}
+
+// event on the list element
+travelListItemView.listElement.addEventListener("mouseover", deleteItem);

@@ -2,7 +2,7 @@
 
 class TravelListItemView {
   constructor() {
-    // selecting the element in which the list is to be viewd
+    // selecting the element in which the list is to be viewed
     this.listElement = document.getElementById("list");
 
     // data to be viewed
@@ -26,10 +26,10 @@ class TravelListItemView {
   #generateTravelListMarkup(data) {
     //console.log(this.#data);
     const markup = `
-        <li class="list-item" data-id="${data.id}">
-            <input type="checkbox" class="list-checkbox" value="${data.packed}" />
+        <li class="list-item" data-id="${data.id}" id="list-item">
+            <input type="checkbox" class="list-checkbox" value="${data.packed}" id="packed" />
             <span>${data.quantity} ${data.description}</span>
-            <button class="delete-btn">❌</button>
+            <button class="delete-btn" id="delete">❌</button>
         </li>
     `;
     return markup;
