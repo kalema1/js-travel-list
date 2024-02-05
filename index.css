@@ -38,13 +38,19 @@ body {
   padding: 2.4rem 0;
 }
 
-.add-form {
+.form-section {
   background-color: #e5771f;
+}
+.add-form {
   padding: 2.8rem 0;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.8rem;
+}
+.input-elements {
+  display: flex;
+  gap: 1.2rem;
 }
 
 .add-form-heading {
@@ -125,4 +131,42 @@ body {
   text-align: center;
   font-weight: 700;
   padding: 3.2rem 0;
+}
+
+/* *************************** */
+/* BELOW 920px */
+/* ******************************/
+@media (max-width: 58em) {
+  .container {
+    padding: 2rem;
+  }
+  .add-form {
+    display: grid;
+    grid-template-columns: 1fr 1f;
+    gap: 2rem;
+  }
+  .add-form-heading {
+    text-align: center;
+  }
+}
+
+/* *************************** */
+/* BELOW 730px*/
+/* ******************************/
+@media (max-width: 47em) {
+  .heading {
+    font-size: 6.4rem;
+    word-spacing: 20px;
+    letter-spacing: -7px;
+    padding: 2.4rem 2rem;
+  }
+}
+
+/* *************************** */
+/* BELOW 564px*/
+/* ******************************/
+@media (max-width: 35em) {
+  .heading {
+    font-size: 5.2rem;
+  }
 }
