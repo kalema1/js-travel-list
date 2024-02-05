@@ -6,7 +6,6 @@ import { travelListItemView } from "./travelListView.js";
 const inputItemElement = document.getElementById("form-input");
 const quantityElement = document.getElementById("select-option");
 const formElement = document.getElementById("add-form");
-const isPackedElement = document.getElementById("packed");
 
 /**
  * submits item to the list
@@ -60,3 +59,5 @@ function deleteItem(event) {
 
 // event on the list element
 travelListItemView.listElement.addEventListener("mouseover", deleteItem);
+
+console.log(state.travelListItems.length);
