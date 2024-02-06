@@ -57,6 +57,9 @@ function deleteItem(event) {
   });
 }
 
+// render the select options
+travelListItemView.renderSelectOptionMarkup();
+
 // event on the list element
 travelListItemView.listElement.addEventListener("mouseover", deleteItem);
 

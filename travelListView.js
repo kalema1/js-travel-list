@@ -4,6 +4,7 @@ class TravelListItemView {
   constructor() {
     // selecting the element in which the list is to be viewed
     this.listElement = document.getElementById("list");
+    this.selectElement = document.getElementById("select-option");
 
     // data to be viewed
     this.data;
@@ -33,6 +34,31 @@ class TravelListItemView {
         </li>
     `;
     return markup;
+  }
+
+  /**
+   *  generates the markup for the select options
+   *
+   */
+  #generateSelectOptionMarkup() {
+    const optionMarkup = Array.from({ length: 20 }, (_, i) => i + 1).map(
+      (num) =>
+        `<option value="${num}" key="${num}">
+        ${num}
+      </option>`
+    );
+
+    return optionMarkup;
+  }
+
+  /**
+   * renders the select option markup
+   *
+   */
+  renderSelectOptionMarkup() {
+    const selectOptionMarkup = this.#generateSelectOptionMarkup();
+    this.selectElement.innerHTML = "";
+    this.selectElement.insertAdjacentHTML("beforeend", selectOptionMarkup);
   }
 }
 
