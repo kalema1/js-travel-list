@@ -8,3 +8,4 @@ This application uses a Model View Controller (MVC) architecture in its design a
 The application is built using plain Javascript, html and css.
 The applicaton removes or deletes the unrequired items from the list.
 The application checks out the already packed items or finished tasks on the list
+The application live demo is on the link https://js-travel-listapp.netlify.app
