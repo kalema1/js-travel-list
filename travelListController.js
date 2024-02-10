@@ -1,10 +1,8 @@
 // this is a controller file that acts as a bridge between the state and the view of the application
 
-import { state } from "./travelListState.js";
 import { travelListItemView } from "./travelListView.js";
+import { travelListState } from "./travelListState.js";
 
-const inputItemElement = document.getElementById("form-input");
-const quantityElement = document.getElementById("select-option");
 const formElement = document.getElementById("add-form");
 
 /**
@@ -14,35 +12,38 @@ const formElement = document.getElementById("add-form");
  */
 function handleSubmitItem(event) {
   event.preventDefault();
-  // get data from form
-  const description = inputItemElement.value;
-  const quantity = quantityElement.value;
 
-  if (!description) {
-    return;
-  }
-
-  // create travel list item object
-  const travelItem = {
-    description: description,
-    quantity: quantity,
+  //  get the item object
+  let travelListItem = {
+    ...travelListItemView.getFormValues(),
     packed: false,
     id: Date.now(),
   };
 
-  // add item object to the array
-  state.travelListItems.push(travelItem);
+  if (!travelListItem.description) {
+    return;
+  }
 
-  // render the travel list
-  travelListItemView.renderTravelList(travelItem);
+  // get item list from localstorage
+  let travelItems = travelListState.getTravelListItems();
+  travelItems.push(travelListItem);
+  travelListState.savetravelListItem(travelItems);
+
+  // render the travel list item
+  travelListItemView.renderTravelList(travelListItem);
 
   //clear the input elements
-  inputItemElement.value = "";
-  quantityElement.value = "1";
+  travelListItemView.inputItemElement.value = "";
+  travelListItemView.quantityElement.value = "1";
 }
 
 // adding event listener to the form
 formElement.addEventListener("submit", handleSubmitItem);
+
+// render list from the local storage
+travelListState
+  .getTravelListItems()
+  .map((travelItem) => travelListItemView.renderTravelList(travelItem));
 
 /**
  * delegates event and deletes the selected item from the list.
@@ -54,6 +55,7 @@ function deleteItem(event) {
   const deleteElement = event.target.closest("#delete");
   deleteElement?.addEventListener("click", () => {
     listItemElement.remove();
+    state.travelListItems.filter((item) => item.id !== id);
   });
 }
 
@@ -62,5 +64,3 @@ travelListItemView.renderSelectOptionMarkup();
 
 // event on the list element
 travelListItemView.listElement.addEventListener("mouseover", deleteItem);
-
-console.log(state.travelListItems.length);

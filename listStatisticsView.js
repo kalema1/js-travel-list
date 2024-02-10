@@ -10,16 +10,16 @@ class ListStatisticsView {
    * renders statistics view
    * @param {object} - data string to rendered
    */
-  #renderStatisticsView(data) {
+  renderStatisticsView(data) {
     this.statisticData = data;
     const statisticsmarkup = this.#generateStatisticsMarkup(this.statisticData);
     this.statisticsElement.innerHTML = "";
-    this.statisticsElement.insertAdjacentElement("afterend", statisticsmarkup);
+    this.statisticsElement.insertAdjacentHTML("beforeend", statisticsmarkup);
   }
 
   #generateStatisticsMarkup(data) {
     const markup = `
-        <em>You have ${data.travelListlength} items on your list, and you already packed ${data.travelitemspacked} (${data.pecentageOftravelitemspacked}%)</em>
+        <em>You have ${data.travelListLength} items on your list, and you already packed ${data.travelItemsPacked} (${data.pecentageOftravelItemsPacked}%)</em>
     `;
     return markup;
   }

@@ -5,18 +5,28 @@ class TravelListItemView {
     // selecting the element in which the list is to be viewed
     this.listElement = document.getElementById("list");
     this.selectElement = document.getElementById("select-option");
+    this.inputItemElement = document.getElementById("form-input");
+    this.quantityElement = document.getElementById("select-option");
+  }
 
-    // data to be viewed
-    this.data;
+  /**
+   * get input values from the form element
+   */
+  getFormValues() {
+    const description = this.inputItemElement.value;
+    const quantity = this.quantityElement.value;
+    return {
+      description: description,
+      quantity: quantity,
+    };
   }
 
   /**
    * renders the travel list item
-   * @param {string} - data string to rendered
+   * @param {object} - data object to rendered
    */
   renderTravelList(data) {
-    this.data = data;
-    const travelListMarkup = this.#generateTravelListMarkup(this.data);
+    const travelListMarkup = this.generateTravelListMarkup(data);
     this.listElement.insertAdjacentHTML("beforeend", travelListMarkup);
   }
 
@@ -24,8 +34,7 @@ class TravelListItemView {
    *  generates the markup for the list items to be displayed
    *
    */
-  #generateTravelListMarkup(data) {
-    //console.log(this.#data);
+  generateTravelListMarkup(data) {
     const markup = `
         <li class="list-item" data-id="${data.id}" id="list-item">
             <input type="checkbox" class="list-checkbox" value="${data.packed}" id="packed" />
@@ -40,7 +49,7 @@ class TravelListItemView {
    *  generates the markup for the select options
    *
    */
-  #generateSelectOptionMarkup() {
+  generateSelectOptionMarkup() {
     const optionMarkup = Array.from({ length: 20 }, (_, i) => i + 1).map(
       (num) =>
         `<option value="${num}" key="${num}">
@@ -56,7 +65,7 @@ class TravelListItemView {
    *
    */
   renderSelectOptionMarkup() {
-    const selectOptionMarkup = this.#generateSelectOptionMarkup();
+    const selectOptionMarkup = this.generateSelectOptionMarkup();
     this.selectElement.innerHTML = "";
     this.selectElement.insertAdjacentHTML("beforeend", selectOptionMarkup);
   }
