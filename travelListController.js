@@ -59,7 +59,6 @@ function deleteItem(event) {
   const itemIndex = travelListState
     .getTravelListItems()
     .findIndex((item) => item.id === id);
-  console.log(itemIndex);
 
   deleteElement?.addEventListener("click", () => {
     controlDeleteItem(listItemElement, itemIndex);
@@ -76,9 +75,6 @@ function controlDeleteItem(elementToBeRemoved, itemIndex) {
   // save the remaining item back to local storage
   // replace the existing
   travelListState.savetravelListItem(travelListItems);
-
-  console.log(travelListState.getTravelListItems().splice(itemIndex, 1));
-  console.log(travelListState.getTravelListItems());
 
   // remove element from DOM
   elementToBeRemoved.remove();
