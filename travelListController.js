@@ -53,10 +53,35 @@ travelListState
 function deleteItem(event) {
   const listItemElement = event.target.closest("#list-item");
   const deleteElement = event.target.closest("#delete");
+  const id = listItemElement.getAttribute("data-id");
+  console.log(id);
+
+  const itemIndex = travelListState
+    .getTravelListItems()
+    .findIndex((item) => item.id === id);
+  console.log(itemIndex);
+
   deleteElement?.addEventListener("click", () => {
-    listItemElement.remove();
-    state.travelListItems.filter((item) => item.id !== id);
+    controlDeleteItem(listItemElement, itemIndex);
   });
+}
+
+function controlDeleteItem(elementToBeRemoved, itemIndex) {
+  // get travel list from local storage
+  let travelListItems = travelListState.getTravelListItems();
+
+  // remove the selected element from the list got from the local storage
+  travelListItems.splice(itemIndex, 1);
+
+  // save the remaining item back to local storage
+  // replace the existing
+  travelListState.savetravelListItem(travelListItems);
+
+  console.log(travelListState.getTravelListItems().splice(itemIndex, 1));
+  console.log(travelListState.getTravelListItems());
+
+  // remove element from DOM
+  elementToBeRemoved.remove();
 }
 
 // render the select options
