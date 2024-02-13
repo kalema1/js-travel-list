@@ -65,6 +65,11 @@ function deleteItem(event) {
   });
 }
 
+/**
+ * controls the deletion of an element and item from local storage
+ * @param {object} elementToBeRemoved - element to be removed from the DOM
+ * @param {number} itemIndex - index of the item in the travel list Array
+ */
 function controlDeleteItem(elementToBeRemoved, itemIndex) {
   // get travel list from local storage
   let travelListItems = travelListState.getTravelListItems();
