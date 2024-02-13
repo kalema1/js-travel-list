@@ -55,7 +55,6 @@ function deleteItem(event) {
   const listItemElement = event.target.closest("#list-item");
   const deleteElement = event.target.closest("#delete");
   const id = listItemElement.getAttribute("data-id");
-  console.log(id);
 
   const itemIndex = travelListState
     .getTravelListItems()
@@ -87,6 +86,7 @@ travelListItemView.renderSelectOptionMarkup();
 // event on the list element
 travelListItemView.listElement.addEventListener("mouseover", deleteItem);
 
+// length of the travel list items
 const lengthOfTravelListItems = travelListState.getTravelListItems().length;
 
 // render the statistics data
