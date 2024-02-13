@@ -3,7 +3,6 @@
 class ListStatisticsView {
   constructor() {
     this.statisticsElement = document.getElementById("statistics");
-    this.statisticData;
   }
 
   /**
@@ -11,15 +10,14 @@ class ListStatisticsView {
    * @param {object} - data string to rendered
    */
   renderStatisticsView(data) {
-    this.statisticData = data;
-    const statisticsmarkup = this.#generateStatisticsMarkup(this.statisticData);
+    const statisticsmarkup = this.generateStatisticsMarkup(data);
     this.statisticsElement.innerHTML = "";
     this.statisticsElement.insertAdjacentHTML("beforeend", statisticsmarkup);
   }
 
-  #generateStatisticsMarkup(data) {
+  generateStatisticsMarkup(data) {
     const markup = `
-        <em>You have ${data.travelListLength} items on your list, and you already packed ${data.travelItemsPacked} (${data.pecentageOftravelItemsPacked}%)</em>
+        <em>You have ${data} items on your list.</em>
     `;
     return markup;
   }

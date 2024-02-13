@@ -2,6 +2,7 @@
 
 import { travelListItemView } from "./travelListView.js";
 import { travelListState } from "./travelListState.js";
+import { listStatisticsView } from "./listStatisticsView.js";
 
 const formElement = document.getElementById("add-form");
 
@@ -85,3 +86,8 @@ travelListItemView.renderSelectOptionMarkup();
 
 // event on the list element
 travelListItemView.listElement.addEventListener("mouseover", deleteItem);
+
+const lengthOfTravelListItems = travelListState.getTravelListItems().length;
+
+// render the statistics data
+listStatisticsView.renderStatisticsView(lengthOfTravelListItems);
