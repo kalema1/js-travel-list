@@ -73,7 +73,7 @@ class TravelListState {
    * @param {string} id - the id of the item to be removed
    * @throws {Error} - if the id provided is invalid or doesn't exist in the list
    */
-  removedTravelItem(id) {
+  removeTravelItem(id) {
     if (typeof id !== "string") {
       throw new Error("Id must be a valid string");
     }
