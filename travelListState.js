@@ -14,38 +14,36 @@ class TravelListState {
   travelList;
 
   constructor() {
-    this.travelList = JSON.parse(
-      localStorage.getItem(travelListState.LOCAL_STORAGE_KEY)
-    );
-    if (!Array.isArray(this.travelList)) {
-      this.travelList = [];
-    }
+    this.travelList = this.travelList
+      ? JSON.parse(localStorage.getItem(TravelListState.LOCAL_STORAGE_KEY))
+      : [];
   }
+
   /**
    * gets the list items from the local storage
    * @returns {travelItem[]}
    */
   getTravelList() {
-    let travelList = [...this.travelList];
+    let travelList = this.travelList;
     return travelList;
   }
 
   /**
    * saves travel list item to local storage
-   * @param {object} travelList - object with data to be saved
+   * @param {travelItem[]} travelList - array of travel items to be saved
    */
-  savetravelListItem(travelList) {
+  saveTravelList(travelList) {
     this.travelList = travelList;
     localStorage.setItem(
-      travelListState.LOCAL_STORAGE_KEY,
+      TravelListState.LOCAL_STORAGE_KEY,
       JSON.stringify(travelList)
     );
   }
 
   /**
    * Add an item to the travel list
-   * @param {travelItem} - item to be added
-   * @throws {Error} - when item is not valid ot item is a duplicate
+   * @param {travelItem} item - item to be added
+   * @throws {Error} - when item is not valid or item is a duplicate
    */
   addTravelItem(item) {
     // check if item is an object
@@ -54,18 +52,17 @@ class TravelListState {
     }
 
     // check that item doesn't already exist
-    const isDuplicateItem = !!this.travelList.find(
+    const isDuplicateItem = this.travelList.find(
       (element) => element.id === item.id
     );
 
     if (isDuplicateItem) {
-      throw new Error("item already exists in the list");
+      throw new Error("Item already exists in the list");
     }
 
-    const travelList = this.getTravelList();
-    travelList.push({ ...item });
-
-    this.savetravelListItem();
+    let travelList = this.getTravelList();
+    travelList.push(item);
+    this.saveTravelList(travelList);
   }
 
   /**
@@ -78,17 +75,17 @@ class TravelListState {
       throw new Error("Id must be a valid string");
     }
 
-    const itemToBeRemoved = this.travelList.find(
+    const indexToRemove = this.travelList.findIndex(
       (element) => element.id === id
     );
-    if (!itemToBeRemoved) {
+
+    if (indexToRemove === -1) {
       throw new Error("Item doesn't exist in the list");
     }
 
-    const travelList = this.getTravelList();
-    travelList.filter((element) => element.id === id);
-
-    this.savetravelListItem(travelList);
+    this.travelList.splice(indexToRemove, 1);
+    this.saveTravelList(this.travelList);
   }
 }
+
 export const travelListState = new TravelListState();
