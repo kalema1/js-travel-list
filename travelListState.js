@@ -75,13 +75,15 @@ class TravelListState {
     }
 
     const travelList = this.getTravelList();
-    const indexToRemove = travelList.findIndex((element) => element.id === id);
+    const indexToBeRemoved = travelList.findIndex(
+      (element) => element.id === id
+    );
 
-    if (indexToRemove === -1) {
+    if (indexToBeRemoved === -1) {
       throw new Error("Item doesn't exist in the list");
     }
 
-    travelList.splice(indexToRemove, 1);
+    travelList.splice(indexToBeRemoved, 1);
     this.saveTravelList(travelList);
   }
 }
