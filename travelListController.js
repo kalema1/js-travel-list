@@ -41,6 +41,23 @@ class TravelListController {
   }
 
   /**
+   * delegates event and deletes the selected item from the list.
+   * @param {object} event
+   *
+   */
+  deleteItem(event) {
+    const listItemElement = event.target.closest("#list-item");
+    const deleteElement = event.target.closest("#delete");
+    const elementIdAttribute = listItemElement.getAttribute("data-id");
+    const id = Number(elementIdAttribute);
+
+    deleteElement?.addEventListener("click", () => {
+      travelListState.removeTravelItem(id);
+      listItemElement.remove();
+    });
+  }
+
+  /**
    * initilizes the application
    */
   initilizeApp() {
@@ -54,7 +71,12 @@ class TravelListController {
     travelListState
       .getTravelList()
       .forEach((travelItem) => travelListItemView.renderTravelList(travelItem));
-    console.log(travelListState.getTravelList());
+
+    // event on the list element
+    travelListItemView.listElement.addEventListener(
+      "mouseover",
+      this.deleteItem
+    );
   }
 }
 

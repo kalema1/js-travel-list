@@ -70,20 +70,19 @@ class TravelListState {
    * @throws {Error} - if the id provided is invalid or doesn't exist in the list
    */
   removeTravelItem(id) {
-    if (typeof id !== "string") {
-      throw new Error("Id must be a valid string");
+    if (typeof id !== "number") {
+      throw new Error("Id must be a number");
     }
 
-    const indexToRemove = this.travelList.findIndex(
-      (element) => element.id === id
-    );
+    const travelList = this.getTravelList();
+    const indexToRemove = travelList.findIndex((element) => element.id === id);
 
     if (indexToRemove === -1) {
       throw new Error("Item doesn't exist in the list");
     }
 
-    this.travelList.splice(indexToRemove, 1);
-    this.saveTravelList(this.travelList);
+    travelList.splice(indexToRemove, 1);
+    this.saveTravelList(travelList);
   }
 }
 
