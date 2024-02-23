@@ -2,7 +2,7 @@
 
 import { travelListItemView } from "./travelListView.js";
 import { travelListState } from "./travelListState.js";
-//import { listStatisticsView } from "./listStatisticsView.js";
+import { listStatisticsView } from "./listStatisticsView.js";
 
 class TravelListController {
   constructor() {
@@ -38,6 +38,9 @@ class TravelListController {
     //clear the input elements
     travelListItemView.inputItemElement.value = "";
     travelListItemView.quantityElement.value = "1";
+
+    // render the statistics data
+    listStatisticsView.renderStatisticsView(travelListState.getListLength());
   }
 
   /**
@@ -54,6 +57,9 @@ class TravelListController {
     deleteElement?.addEventListener("click", () => {
       travelListState.removeTravelItem(id);
       listItemElement.remove();
+
+      // render the statistics data
+      listStatisticsView.renderStatisticsView(travelListState.getListLength());
     });
   }
 
@@ -77,6 +83,9 @@ class TravelListController {
       "mouseover",
       this.deleteItem
     );
+
+    // render the statistics data
+    listStatisticsView.renderStatisticsView(travelListState.getListLength());
   }
 }
 
