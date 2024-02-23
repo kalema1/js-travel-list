@@ -86,6 +86,14 @@ class TravelListState {
     travelList.splice(indexToBeRemoved, 1);
     this.saveTravelList(travelList);
   }
+
+  /**
+   * get the length of the list in the local storage
+   */
+  getListLength() {
+    const travelListLength = this.getTravelList().length;
+    return travelListLength;
+  }
 }
 
 export const travelListState = new TravelListState();
