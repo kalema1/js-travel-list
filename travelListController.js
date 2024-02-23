@@ -33,7 +33,6 @@ class TravelListController {
     travelListState.addTravelItem(travelItem);
 
     // render the travel list item
-
     travelListItemView.renderTravelList(travelItem);
 
     //clear the input elements
@@ -50,6 +49,12 @@ class TravelListController {
 
     // adding event listener to the form
     this.formElement.addEventListener("submit", this.handleSubmitItem);
+
+    // render list from the local storage
+    travelListState
+      .getTravelList()
+      .forEach((travelItem) => travelListItemView.renderTravelList(travelItem));
+    console.log(travelListState.getTravelList());
   }
 }
 

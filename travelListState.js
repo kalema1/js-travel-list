@@ -14,9 +14,8 @@ class TravelListState {
   travelList;
 
   constructor() {
-    this.travelList = this.travelList
-      ? JSON.parse(localStorage.getItem(TravelListState.LOCAL_STORAGE_KEY))
-      : [];
+    this.travelList =
+      JSON.parse(localStorage.getItem(TravelListState.LOCAL_STORAGE_KEY)) || [];
   }
 
   /**
